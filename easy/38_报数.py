@@ -12,31 +12,20 @@ class Solution:
         :type n: int
         :rtype: str
         """
-        from functools import reduce; 
-        if n == 1:
-            return "1";
-        
-        if n == 2:
-            return "11";
-        
-        l = "11";
-        c = 3;
-        while c <= n:
-            total,unit = [],[];
-            for i in range(len(l)-1):
-                if i == 0 :
-                    unit = [1,l[i]];
-                if l[i] == l[i+1]:
-                    unit[0] += 1;
-                else :
-                    total.append([str(x) for x in unit]);
-                    unit = [1,l[i+1]]; 
-                if i == len(l)-2:
-                    total.append([str(x) for x in unit]);
-            l = reduce(lambda x,y : "".join(x)+"".join(y),total);
-            if isinstance(l,list):
-               l = "".join(l); 
-            c += 1;
-        
-        return l;
-        
+        if n==1:
+            return '1'          
+        if n==2:              
+            return '11'        
+        pre='11'
+        for i in range(3,n+1):              
+            res=''
+            count=1
+            for j in range(1,len(pre)):
+                if pre[j-1]==pre[j]:
+                    count+=1
+                else:
+                    res+=str(count)+pre[j-1]
+                    count=1
+            res+=str(count)+pre[j]
+            pre=res
+        return res

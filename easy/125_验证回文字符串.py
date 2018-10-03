@@ -9,13 +9,21 @@ class Solution:
         :type s: str
         :rtype: bool
         """
-        s = s.replace(" ","");
-        s = s.lower();
-        l = [];
-        lowercase = string.ascii_lowercase+"0123456789";
+"""
+        :type s: str
+        :rtype: bool
+        """
+        """
+        s_copy = "";
         for i in s:
-            if i in lowercase:
-                l.append(i);
-        if l == l[::-1]:
-            return True;
-        return False;
+            if i in string.ascii_letters+string.digits :
+                s_copy += i.lower();
+        return s_copy == s_copy[::-1];
+        """
+        """
+        s_copy = "".join(list(filter(str.isalnum,s))).lower();
+        return s_copy == s_copy[::-1];
+        """
+        import re
+        s_copy = re.sub(r'[^a-z|0-9]+','',s.lower());
+        return s_copy == s_copy[::-1];

@@ -13,12 +13,7 @@ class Solution:
         """
         if len(needle) == 0:
             return 0;
-        l_n = list(needle);
-        len_n = len(l_n);
-        
-        
-        for i in range(len(haystack)-len_n+1):
-            print(str(haystack[i:i+len_n]),str(needle));
-            if haystack[i:i+len_n] == needle:
+        for i in range(len(haystack)-len(needle)+1):
+            if haystack[i:i+len(needle)] == needle:
                 return i;
         return -1;

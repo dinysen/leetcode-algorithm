@@ -11,6 +11,24 @@ class Solution:
         :type n: int
         :rtype: int
         """
+        return self.firstBadVersion2(1,n);
+        
+    def firstBadVersion2(self,start,end):
+        if start >= end:
+            return end;
+        code = (start + end)//2;
+        if isBadVersion(code):
+            end = code;
+        else :
+            start = code+1;
+        return self.firstBadVersion2(start,end);
+
+class Solution:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
         if isBadVersion(1):
             return 1;
         l,r,mid = 1,n,0;

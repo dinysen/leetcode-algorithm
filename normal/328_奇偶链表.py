@@ -3,33 +3,44 @@
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-# 要注意的是最后一个节点的next要置空，否则链会形成闭环，没法玩了
+
+"""
+这个比较慢
+class Solution:
+    def oddEvenList(self, head):
+        even = [];
+        index = 1;
+        h = ListNode(-1);
+        h_tmp = h;
+        while head:
+            if index % 2 == 0:
+                even.append(head);
+            else:
+                h_tmp.next = head;
+                h_tmp = h_tmp.next;
+            head = head.next;
+            index += 1;
+        for i in even:
+            h_tmp.next = i;
+            h_tmp = h_tmp.next;
+        h_tmp.next = None;
+        return h.next;
+"""
 
 class Solution:
     def oddEvenList(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        l_temp = [];
-        h = ListNode(0);
-        h_tmp = h;
-        i = 1;
-        
-        while head:
-            if i % 2 != 0:
-                h_tmp.next = head;
-                h_tmp = h_tmp.next;
-            else:
-                l_temp.append(head);
-            head = head.next;
-            i += 1;
-        
-        for node in l_temp:
-            h_tmp.next = node;
-            h_tmp = h_tmp.next;
-            
-        h_tmp.next = None;
-        
-        return h.next;
-                
+        if not head or not head.next or not head.next.next:
+            return head;
+        h_odd = head.next.next;
+        h_even = head.next;
+        head.next = h_odd;
+        tmp_even = h_even;
+        while h_odd.next:
+            h_even.next = h_even.next.next;
+            h_even = h_even.next;
+            h_odd.next = h_odd.next.next;
+            if h_odd.next:
+                h_odd = h_odd.next;
+        h_odd.next = tmp_even;
+        h_even.next = None;
+        return head;

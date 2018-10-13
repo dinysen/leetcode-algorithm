@@ -13,21 +13,22 @@ class Solution:
         """
         if not root:
             return [];
-        l = [];
         stack = [root];
-        i = 1;
+        line = 1;
+        result = [];
         while len(stack) != 0:
-            size = len(stack);
             subList = [];
-            stack_inuse = stack[::-1] if i%2 == 0 else stack[:];
-            for index in range(size):
-                node_inval = stack_inuse.pop(0);
+            size = len(stack);
+            for i in range(size):
                 node = stack.pop(0);
-                subList.append(node_inval.val);
+                subList.append(node.val);
                 if node.left:
                     stack.append(node.left);
                 if node.right:
                     stack.append(node.right);
-            i += 1;
-            l.append(subList);
-        return l;
+                
+            
+            result.append(subList if line % 2 ==1 else subList[::-1] );
+            line += 1;
+        
+        return result;

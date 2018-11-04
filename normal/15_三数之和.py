@@ -30,3 +30,25 @@ class Solution:
                 else:
                     j += 1;
         return l;
+
+#暴力破解，LTE
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums = sorted(nums);
+        res = [];
+        visited = set();
+        for i in range(len(nums)-2):
+            if nums[i] > 0:
+                break;
+            for j in range(i+1,len(nums)-1):
+                if nums[i] + nums[j] > 0:
+                    continue;
+                for k in range(j+1,len(nums)):
+                    if nums[i] + nums[j] + nums[k] == 0 and str(nums[i])+str(nums[j])+str(nums[k]) not in visited:
+                        res.append([nums[i],nums[j],nums[k]]);
+                        visited.add(str(nums[i])+str(nums[j])+str(nums[k]));
+        return res;

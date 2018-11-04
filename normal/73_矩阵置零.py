@@ -48,4 +48,29 @@ class Solution:
         if f_col:
             for i in range(len(matrix)):
                 matrix[i][0] = 0;
+
+-----------------------------------------------------------------------
         
+class Solution:
+    def setZeroes(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        if len(matrix) == 0:
+            return None;
+        
+        t = [];
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == 0:
+                    t.append((i,j));
+        
+        while t:
+            (i,j) = t.pop();
+            matrix[i] = [0] * len(matrix[0]);
+            for item in matrix:
+                item[j] = 0;
+        
+        
+            

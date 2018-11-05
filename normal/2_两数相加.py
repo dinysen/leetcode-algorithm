@@ -33,3 +33,34 @@ class Solution:
             tmp_h.next = t_h;
             tmp_h = tmp_h.next;
         return h.next;
+
+--------------------------------------第二次。。
+class Solution:
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        num1_str = "";
+        while l1:
+            num1_str += str(l1.val);
+            l1 = l1.next;
+        num1 = int(num1_str[::-1]);
+        num2_str = "";
+        while l2:
+            num2_str += str(l2.val);
+            l2 = l2.next;
+        num2 = int(num2_str[::-1]);
+        res = str(num1 + num2)[::-1];
+        print(num1,num2,res);
+        
+        l3 = ListNode(None);
+        head = l3;
+        for i in range(len(res)):
+            head.val = res[i];
+            if i != len(res)-1:
+                head.next = ListNode(None);
+                head = head.next;
+        return l3;
+        

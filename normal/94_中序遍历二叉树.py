@@ -20,14 +20,20 @@ class Solution:
 
 class Solution:
     def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
         stack = [];
-        result = [];
-        while len(stack) != 0 or root:
+        res = [];
+        while True:
             if root:
                 stack.append(root);
                 root = root.left;
             else:
-                root = stack.pop();
-                result.append(root.val);
-                root = root.right;
-        return result;
+                if len(stack) == 0:
+                    return res;
+                node = stack.pop();
+                res.append(node.val);
+                root = node.right;
+        return res;

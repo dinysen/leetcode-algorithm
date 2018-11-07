@@ -4,7 +4,7 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+import collections;
 class Solution:
     def zigzagLevelOrder(self, root):
         """
@@ -13,22 +13,21 @@ class Solution:
         """
         if not root:
             return [];
-        stack = [root];
-        line = 1;
-        result = [];
-        while len(stack) != 0:
-            subList = [];
+        stack = collections.deque();
+        stack.append(root);
+        res = [];
+        row = 0;
+        while stack:
             size = len(stack);
+            tmp = [];
+            row += 1;
             for i in range(size):
-                node = stack.pop(0);
-                subList.append(node.val);
+                node = stack.popleft();
+                tmp.append(node.val);
                 if node.left:
                     stack.append(node.left);
                 if node.right:
                     stack.append(node.right);
-                
-            
-            result.append(subList if line % 2 ==1 else subList[::-1] );
-            line += 1;
-        
-        return result;
+            res.append(tmp[::-1] if row%2 == 0 else tmp );
+        return res;
+                    

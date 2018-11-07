@@ -5,6 +5,10 @@
 #         self.left = None
 #         self.right = None
 
+#解题思路
+#找到前序中的第一个节点（根节点）在中序中的位置，此位置左边全是左子树，右边全是右子树
+#随后左子树数组的长度对应着前序中左子树的长度，右子树亦然
+#随后进行递归
 class Solution:
     def buildTree(self, preorder, inorder):
         """

@@ -1,3 +1,44 @@
+#回溯---------------------------------------------
+class Solution:
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        if len(digits) == 0:
+            return [];
+        m = {
+            "2" : ["a","b","c"],
+            "3" : ["d","e","f"],
+            "4" : ["g","h","i"],
+            "5" : ["j","k","l"],
+            "6" : ["m","n","o"],
+            "7" : ["p","q","r","s"],
+            "8" : ["t","u","v"],
+            "9" : ["w","x","y","z"]
+        };
+        self.size = len(digits);
+        l = list(map(lambda x : m[x],digits));
+        res = self.backtracking([],[],l);
+        return res;
+        
+    def backtracking(self,res,tmp,digits):
+        if len(tmp) == self.size:
+            res.append("".join(tmp));
+        
+        if len(digits) == 0:
+            return res;
+            
+        base = digits[0];
+        for i in base:
+            tmp.append(i);
+            next_digit = digits[1:];
+            self.backtracking(res,tmp,next_digit);
+            tmp.pop();
+        
+        return res;
+#-------------------------------------------------------------
+
 from functools import reduce
 class Solution:
     def letterCombinations(self, digits):

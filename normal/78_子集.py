@@ -9,21 +9,24 @@ class Solution:
             res = res + [[i] + l for l in res ];
         return res;
 
-#子集-回溯 LTE--------------------------------------
+#子集-回溯--------------------------------------
 class Solution:
     def subsets(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        self.res = [];
-        self.backtracking([],nums);
-        return self.res;
+        return self.backtracking([],[],nums);
         
-    def backtracking(self,sub,nums):
-        if sub not in self.res:
-            self.res.append(sub[:]);
+    def backtracking(self,res,tmp,nums):
+        if sorted(tmp) in res:
+            return res;
+        else:
+            res.append(tmp[:]);
+            
         for i in range(len(nums)):
-            sub.append(nums[i]);
-            self.backtracking(sorted(sub),nums[:i]+nums[i+1:]);
-            sub.pop();
+            tmp.append(nums[i]);
+            self.backtracking(res,sorted(tmp),nums[:i]+nums[i+1:]);
+            tmp.pop();
+            
+        return res;

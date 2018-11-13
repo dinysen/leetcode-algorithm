@@ -4,20 +4,20 @@ class Solution:
         :type s: str
         :rtype: bool
         """
-        """
-        '('，')'，'{'，'}'，'['，']'
-        """
-        d_r = {"(":")","{":"}","[":"]"};
-        d_l = {")":"(","}":"{","]":"["};
-        l = [];
-        for i in s:
-            if i in d_r:
-                l.append(i);
-            if i in d_l:
-                if len(l) == 0 or d_l[i] != l[-1]:
+        m_l = { '(':")", "{" : "}" , "[":"]" };
+        m_r = { ")":"(", "}":"{" , "]":"[" };
+        stack = [];
+        if len(s) == 0:
+            return True;
+        for i in list(s):
+            if i in m_l:
+                stack.append(i);
+            else:
+                l = m_r[i];
+                if len(stack) == 0 or stack[-1] != l:
                     return False;
-                l.pop();
-        if len(l) != 0:
+                stack.pop();
+        if len(stack) != 0:
             return False;
         return True;
         

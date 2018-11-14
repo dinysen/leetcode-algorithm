@@ -1,22 +1,17 @@
 class Solution:
     def evalRPN(self, tokens):
-        """
-        :type tokens: List[str]
-        :rtype: int
-        """
         stack = [];
+        countl = { 
+            "+" : lambda x,y : x+y, 
+            "-" : lambda x,y : x-y,
+            "*" : lambda x,y : x*y,
+            "/" : lambda x,y : x/y
+        }
         for i in tokens:
-            if i == "+" or i == "-" or i == "*" or i == "/":
-                b = int(stack.pop());
+            if i in countl:
                 a = int(stack.pop());
-                if i == "+":
-                    stack.append(a+b);
-                if i == "-":
-                    stack.append(a-b);
-                if i == "*":
-                    stack.append(a*b);
-                if i == "/":
-                    stack.append(a/b);
+                b = int(stack.pop());
+                stack.append(countl[i](b,a));
             else:
-                stack.append(int(i));
-        return int(stack[0]);
+                stack.append(i);
+        return int(stack[-1]);

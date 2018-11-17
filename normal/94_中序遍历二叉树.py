@@ -5,35 +5,22 @@
 #         self.left = None
 #         self.right = None
 
-"""
-递归
-class Solution:
-    def inorderTraversal(self, root):
-        if not root:
-            return [];
-        l = [];
-        l.extend(self.inorderTraversal(root.left));
-        l.append(root.val);
-        l.extend(self.inorderTraversal(root.right));
-        return l;      
-"""
-
 class Solution:
     def inorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
         """
+        if not root:
+            return [];
         stack = [];
         res = [];
-        while True:
-            if root:
-                stack.append(root);
-                root = root.left;
-            else:
-                if len(stack) == 0:
-                    return res;
-                node = stack.pop();
-                res.append(node.val);
-                root = node.right;
+        cur = root;
+        while len(stack) != 0 or cur:
+            while cur:
+                stack.append(cur);
+                cur = cur.left;
+            cur = stack.pop();
+            res.append(cur.val);
+            cur = cur.right;
         return res;

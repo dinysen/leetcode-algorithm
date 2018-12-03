@@ -1,4 +1,4 @@
-class Solution(object):
+class Solution:
     def generate(self, numRows):
         """
         :type numRows: int
@@ -10,10 +10,8 @@ class Solution(object):
             return [[1]];
         if numRows == 2:
             return [[1],[1,1]];
-        l = [[1],[1,1]];
-        n = 2;
-        while n < numRows:
-            t_l = [1] + [l[-1][i]+l[-1][i+1] for i in range(len(l[-1])-1)] + [1];
-            l.append(t_l);
-            n += 1;
-        return l;
+        res = [[1],[1,1]];
+        for i in range(1,numRows-1):
+            tmp = [1] + [ res[i][j]+res[i][j+1] for j in range(len(res[i])-1) ] + [1];
+            res.append(tmp);
+        return res;

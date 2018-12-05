@@ -1,12 +1,13 @@
-#/usr/bin/env/ python3
-#-*- coding: utf-8 -*-
-
-#编写一个函数，其作用是将输入的字符串反转过来。
-
 class Solution:
-	def reverseString(self, s):
-		"""
-		:type s: str
-		:rtype: str
-		"""
-		return s[::-1];
+    def reverseString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        i,j = 0,len(s)-1;
+        list_s = list(s);
+        while i < j:
+            list_s[i],list_s[j] = list_s[j],list_s[i];
+            i+=1;
+            j-=1;
+        return "".join(list_s);
